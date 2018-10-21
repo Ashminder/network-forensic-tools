@@ -1,0 +1,25 @@
+import sqlite3
+import pdb
+import os
+def printProfile(skypeDB):
+#Connect to SQLite Database
+	
+	conn=sqlite3.connect(skypeDB)
+
+	c = conn.cursor()
+	c.execute("SELECT fullname, skypename, city, country, \
+	datetime(profile_timestamp,'unixepoch') FROM Accounts;")
+	
+	for row in c:
+		print '[*] -- Found Account --'
+		print '[+] User: '+str(row[0])
+		print '[+] Skype Username: '+str(row[1])
+		print '[+] Location: '+str(row[2])+','+str(row[3])
+		print '[+] Profile Date: '+str(row[4])
+
+def main():
+	skypeDB = "c:\Users\Singh_Ashminder\Desktop\PRJT(FORENSICS_TOOL\DATABASES\main.db" 
+	printProfile(skypeDB)
+
+if __name__ == "__main__":
+	main()
